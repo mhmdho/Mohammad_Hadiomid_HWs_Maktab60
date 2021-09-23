@@ -4,11 +4,11 @@ Created on Thu Sep 23 09:44:39 2021
 
 @author: Lenovo
 """
-
 # =============================================================================
-#   C
+#   Classwork 10 - (Thursday 1400-07-01 part 1)
 #   https://randomuser.me/documentation
 # =============================================================================
+
 import requests
 
 URL = 'https://randomuser.me/api'
