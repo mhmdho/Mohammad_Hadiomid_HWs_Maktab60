@@ -1,0 +1,26 @@
+body{
+    text-align: center;
+}
+.name{
+    color: red
+}
+
+.phone{
+    color: rgb(7, 3, 0);
+    background-color: rgb(38, 0, 255);
+    display: inline;
+    padding: 20px;
+    border: 10px solid black;
+    border-radius: 10px;
+    margin: 30px;
+}
+
+#birth{
+    background-color: rosybrown;
+    margin: 30px;
+}
+
+.profile{
+    border-radius: 600px;
+    border-left: 10px;
+}
