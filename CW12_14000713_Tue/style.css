@@ -1,0 +1,51 @@
+body {
+    background: url("bg.jpg");
+    background-size: cover;
+    color: white !important;
+}
+
+.gnje {
+    font-size: 5rem !important;
+    font-weight: 600 !important;
+}
+
+.enter {
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+input[type="text"],
+input[type="text"] {
+    text-emphasis-color: white;
+    background-color: transparent !important;
+    color: white !important;
+    border: transparent !important;
+    border-bottom: white solid 2px !important;
+}
+
+input:focus {
+    box-shadow: none !important;
+}
+
+::placeholder {
+    color: white !important;
+}
+
+i {
+    border-bottom: white solid 2px !important;
+    padding-left: 10px;
+}
+
+.form-check .form-check-input {
+    float: right !important;
+}
+
+img{
+    padding-top: 50px;
+
+}
