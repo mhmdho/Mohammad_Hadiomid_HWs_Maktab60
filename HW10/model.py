@@ -34,10 +34,10 @@ class Event:
         self.capacity = capacity
         self.remained_capacity = capacity
         self.ticket_price = ticket_price
-        self.event_id = self.id_generator()
+        self.event_id = self.eid_generator()
 
     @staticmethod
-    def id_generator():
+    def eid_generator():
         ''' generate event ID'''
         redis_event.incr('event_id')
         return redis_event.get('event_id')
@@ -63,9 +63,11 @@ class Event:
 
     def event_tickets_condition(self, event_id):
         '''show remained and sold tickets'''
+        capacity = redis_event.hget(f"event:{event_id}:info",
+                                    "Capacity")
         available_tickets = redis_event.hget(f"event:{event_id}:info",
                                              "Ticket Remained")
-        sold_tickets = self.capacity - int(available_tickets)
+        sold_tickets = int(capacity) - int(available_tickets)
         return f"Sold Tickets:{sold_tickets} - Remained:{available_tickets}"
 
 
@@ -96,9 +98,7 @@ class ReadEvent:
         else:
             self.total_price = self.tickets * float(self.ticket_price) *\
                 (1-self.discount_return(code, self.usertype))
-            result = f"The total price for {self.tickets} tickets with"
-            f"{self.discount_return(code, self.usertype)} discount is"
-            f"{self.total_price}$"
+            result = f"The total price for {self.tickets} tickets with {self.discount_return(code, self.usertype)} discount is {self.total_price}$"
         return result
 
     def discount_return(self, code, usertype):
@@ -137,17 +137,9 @@ class ReadEvent:
                 name=f"event:{self.event_id}:info", mapping={
                         "Ticket Remained": self.remained_capacity})
 
-            print("Your purchase was successful",
-                  redis_event.hget(f"event:{self.event_id}:info", "ID"),
-                  redis_event.hget(f"event:{self.event_id}:info", "Date"),
-                  redis_event.hget(f"event:{self.event_id}:info",
-                                   "Event Name"),
-                  redis_event.hget(f"event:{self.event_id}:info", "Location"),
-                  self.tickets,
-                  self.total_price,
-                  sep="\n")
-            print(redis_event.hgetall(f"event:{self.event_id}:info"))
-            print(redis_event.hgetall(f"sold:{self.event_id}:info"))
+            # print(redis_event.hgetall(f"event:{self.event_id}:info"), "\n")
+            print("\nYour Ticket information:\n",
+                  redis_event.hgetall(f"sold:{self.event_id}:info"))
 
         else:
             print("Unsuccessful transaction, Entered incorrect price")
