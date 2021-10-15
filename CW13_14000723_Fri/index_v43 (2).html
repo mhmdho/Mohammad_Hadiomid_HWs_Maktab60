@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax - step 2</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row my-3">
+            <div class="card w-100">
+                <div class="card-body">
+                    get user list ,
+                    <a href="https://reqres.in/">api sample</a>
+                    <button id="getDataBtn" class="btn btn-primary float-right">get Data</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table responsive" id="userTable">
+                <thead>
+                    <th>id</th>
+                    <th>email</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                    <th>avatar</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- The Modal -->
+        <div class="modal" id="editModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Data</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="" alt="Card image cap">
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" id="ID"></li>
+                                <li class="list-group-item" id="name"></li>
+                                <li class="list-group-item" id="lastname"></li>
+                                <li class="list-group-item" id="email"></li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#getDataBtn').click(function () {
+                $.get('https://reqres.in/api/users', function (data, status) {
+                    console.log('status', status)
+                    console.log(data.data)
+                    deleteBtn = "<span class='btn btn-danger removeUser'>delete</span>"
+                    editBtn = "<span class='btn btn-warning editUser' data-toggle='modal' data-target='#editModal'>edit</span>"
+                    $.each(data.data, function (index, value) {
+                        tr_row = "<tr>"
+                            + `<td>${value.id}</td>`
+                            + `<td>${value.email}</td>`
+                            + `<td>${value.first_name}</td>`
+                            + `<td>${value.last_name}</td>`
+                            + `<td><img src="${value.avatar}" alt="" style="width:50px" ></td>`
+                            + `<td>${deleteBtn}</td>`
+                            + `<td>${editBtn}</td>`
+                            + "</tr>"
+                        // console.log(index +' : ',tr_row)
+                        $('#userTable>tbody').append(tr_row)
+                    })
+                })
+            })
+            // part 1
+
+
+            $('body').on('click', '.removeUser', function () {
+                alert('delete this user')
+                $(this).closest('tr').remove()
+            })
+
+            $('body').on('click', '.editUser', function () {
+                id = $(this).closest("tr").find('td').eq(0).text()
+
+                // first way:
+                $.get(`https://reqres.in/api/users/${id}`, function (data, status) {
+                    $('.card-img-top').attr('src', data.data.avatar)
+                    $('#ID').text(`ID :  ${id}`)
+                    $('#name').text(`First name :  ${data.data.first_name}`)
+                    $('#lastname').text(`Last name :  ${data.data.last_name}`)
+                    $('#email').text(`Email :  ${data.data.email}`)
+
+                // second way:
+                // $.get(`https://reqres.in/api/users/${id}`, function (data, status) {
+                //     $('.card-img-top').attr('src', data.data.avatar)
+                //     $('.list-group-flush').text('')
+                //     $('.list-group-flush').append('<li> name:' + data.data.first_name + '</li>')
+                //     $('.list-group-flush').append('<li> last name:' + data.data.last_name + '</li>')
+                //     $('.list-group-flush').append('<li> email:' + data.data.email + '</li>')
+
+                })
+
+            })
+
+        })
+
+    </script>
+
+</body>
+
+</html>
