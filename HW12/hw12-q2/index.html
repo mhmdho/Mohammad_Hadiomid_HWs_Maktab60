@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="img/icon.png" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <title>Shop - HW12</title>
+</head>
+
+
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="javascript:void(0)">Omid Shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">login</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">about</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(1)" role="button" data-bs-toggle="dropdown">Shop</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Labtop</a></li>
+                <li><a class="dropdown-item" href="#">Cell Phone</a></li>
+                <li><a class="dropdown-item" href="#">Televition</a></li>
+            </ul>
+            </li>
+        </ul>
+        <form class="d-flex">
+            <button class="btn btn-outline-light" type="button" data-bs-toggle="modal" data-bs-target="#myModal">
+                <i class="bi-cart-fill me-1"></i>
+                Cart
+                <span class="badge bg-dark text-white ms-1 rounded-pill" id="crd">0</span>
+            </button>
+        </form>
+        </div>
+    </div>
+    </nav>
+
+
+
+    <!-- products section-->
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div></div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/61cCf94xIEL._AC_SX640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">MacBook Pro 14.2</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span></span>
+                            $997.99
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/71an9eiBxpL._AC_SX640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">MacBook Pro 13.3</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$2000.00</span>
+                            $1809.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/71jG+e7roXL._AC_SX640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">MacBook Air 13.3</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$1998.00</span>
+                            $1899.99
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div></div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SX640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">MacBook Pro 16</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span></span>
+                            $1228.61
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div></div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/61F7c4q8TNL._AC_SX640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">iPhone 13 mini</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span></span>
+                            $1180.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/61IJBsHm97L._AC_SX750_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">iPhone 13 Pro Max</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$1980.00</span>
+                            $1699.79
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/61jLiCovxVL._AC_SX750_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">iPhone 13 Pro</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$1550.00</span>
+                            $1480.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div></div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/71GLMJ7TQiL._AC_SX640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">iPhone 13</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span></span>
+                            $1440.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div></div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/f/AmazonStores/ATVPDKIKX0DER/be780e790f33f3984e1a19ed2b9bc6fc.w1500.h1500._CR0%2C0%2C1500%2C1500_SX640_SY640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Apple Watch Series 7</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span></span>
+                            $390.93
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/e/AmazonStores/ATVPDKIKX0DER/80b93a2e3d6cf9a5001299df2ebce7eb.w1500.h1500._CR0%2C0%2C1500%2C1500_SX640_SY640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Apple Watch Series SE</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$200.00</span>
+                            $180.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/5/AmazonStores/ATVPDKIKX0DER/4d0c2613024b80a906cc6c4a39aadcb6.w1500.h1500._CR0%2C0%2C1500%2C1500_SX640_SY640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Apple Watch Series 3</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$300.00</span>
+                            $280.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div></div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/9/AmazonStores/ATVPDKIKX0DER/bae3b1878bf39b9d174f2c429ec9b724.w1500.h1500._CR0%2C0%2C1500%2C1500_SX640_SY640_.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Apple Watch SE</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span></span>
+                            $299.98
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                        <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                <i class="bi-cart-fill me-1"></i> 
+                                Add to cart
+                            </a>                       
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- suggested products section-->
+    <section class="py-5 bg-light">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h2 class="fw-bolder mb-4">suggested products</h2>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/e/AmazonStores/ATVPDKIKX0DER/80b93a2e3d6cf9a5001299df2ebce7eb.w1500.h1500._CR0%2C0%2C1500%2C1500_SX640_SY640_.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Apple Watch Series SE</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$200.00</span>
+                                $180.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                            <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                    <i class="bi-cart-fill me-1"></i> 
+                                    Add to cart
+                                </a>                       
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/5/AmazonStores/ATVPDKIKX0DER/4d0c2613024b80a906cc6c4a39aadcb6.w1500.h1500._CR0%2C0%2C1500%2C1500_SX640_SY640_.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Apple Watch Series 3</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$300.00</span>
+                                $280.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                            <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                    <i class="bi-cart-fill me-1"></i> 
+                                    Add to cart
+                                </a>                       
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/I/61IJBsHm97L._AC_SX750_.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">iPhone 13 Pro Max</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$1980.00</span>
+                                $1699.79
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                            <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                    <i class="bi-cart-fill me-1"></i> 
+                                    Add to cart
+                                </a>                       
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/I/61jLiCovxVL._AC_SX750_.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">iPhone 13 Pro</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$1550.00</span>
+                                $1480.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="d-flex pb-4 pt-0 border-top-0 bg-transparent justify-content-center">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 2rem; padding: 0pt;" />
+                            <div class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="#">
+                                    <i class="bi-cart-fill me-1"></i> 
+                                    Add to cart
+                                </a>                       
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+      
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Purchase Cart</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+        
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h3>YOUR CART</h3>
+
+            </div>
+        
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Pay</button>
+            </div>
+    
+        </div>
+    </div>
+    </div>
+
+
+    <!-- Footer-->
+    <footer class="py-4 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; HW12 by Mohammad Hadiomid</p></div>
+    </footer>
+
+    
+    <script>
+        $(document).ready(function(){
+            $("body").on("click", ".btn.btn-outline-dark.mt-auto", function(){
+                $(this).text('added')
+                inc = $("#crd").text()
+                inc = parseInt(inc) + 1
+                $("#crd").text(inc)
+                propic = $(this).parentsUntil()[2].children[1].getAttribute("src")
+                proname = $(this).parentsUntil()[2].children[2].children[0].children[0].textContent
+                proprice1 = $(this).parentsUntil()[2].children[2].children[0].children[2].textContent
+                proprice2 = $(this).parentsUntil()[2].children[2].children[0].children[2].nextSibling.textContent
+                proqty = $($(this).parentsUntil()[1].children[0]).val()
+                console.log(propic)
+                
+                $(".modal-body").append(
+
+                    `<li class="list-group-item">
+                    <div class="row justify-content-center">
+                        <div class=" col-md-1 text-center">
+                            <p>${inc}</p> 
+                        </div>
+                            <div class="col-md-2 col-4 text-center">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="${propic}" alt="..." />
+                            <!-- Product details-->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h6 class="fw-bolder">${proname}</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">${proprice1}</span>
+                            <p>${proprice2}</P>
+                        
+                        </div>
+                        <div class="col-md-1 text-center">
+                            ${proqty}
+                        </div>
+                        <div class="col-md-1 text-center">
+                     
+                                <div class="text-center"><a class="btn btn-danger mt-auto" href="#">X</a></div>
+                          
+                        </div>
+                    </div>
+                    </li>`
+                );
+            });
+        });
+
+        $(document).ready(function(){
+            $('body').on('click', '.btn.btn-danger.mt-auto', function () {
+                $(this).closest('li').remove() 
+                dic = $("#crd").text()
+                dic = parseInt(dic) - 1
+                $("#crd").text(dic)
+            })
+        })
+
+
+    </script>
+
+</body>
+</html>
