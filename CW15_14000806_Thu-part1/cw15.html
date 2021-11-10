@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>CW15 | Hadiomid</title>
+</head>
+
+<body>
+    <div class="container my-4">
+        <select class="form-select my-4" aria-label="Default select example">
+            <option selected>Choose User</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+            <option value="6">six</option>
+        </select>
+
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="img/images.png" class="card-img-top" alt="Avatar">
+                <div class="card-body">
+                <h5 class="card-title">Name</h5>
+                <p class="card-text">Email</p>
+                <a href="#" class="btn btn-primary">WebSite</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var userData = {}
+            $("select.form-select").change(function () {
+                var selectedUser = $(this).children("option:selected").val()
+                // alert("You have selected User - " + selectedUser);
+                if (!userData[selectedUser]){
+                    $.get(`https://reqres.in/api/users/${selectedUser}`, function (data) {
+                        userData[selectedUser] = data
+                        // userData2 = {selectedUser : data}
+                        // console.log(selectedUser)
+                        // console.log(userData)
+                        // console.log(userData2)
+                        $(".card-img-top").attr("src", userData[selectedUser].data.avatar)
+                        $(".card-title").text(userData[selectedUser].data.first_name+' - '+userData[selectedUser].data.last_name)
+                        $(".card-text").text(userData[selectedUser].data.email)
+                        $(".btn.btn-primary").attr("href", userData[selectedUser].support.url)
+                        console.log("111")
+                    });
+                }
+
+                else {
+                    $.get(`https://reqres.in/api/users/${selectedUser}`, function (data) {
+                        $(".card-img-top").attr("src", userData[selectedUser].data.avatar)
+                        $(".card-title").text(userData[selectedUser].data.first_name+' - '+userData[selectedUser].data.last_name)
+                        $(".card-text").text(userData[selectedUser].data.email)
+                        $(".btn.btn-primary").attr("href", userData[selectedUser].support.url)
+                        console.log("122")
+                    });
+                }
+            });
+        });
+    </script>
+
+    
+</body>
+</html>
