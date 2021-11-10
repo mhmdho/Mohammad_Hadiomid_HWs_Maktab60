@@ -1,0 +1,2 @@
+db.test.aggregate([ { $match : {_id :ObjectId("617c07529865572d3daad75d")} } 
+		   ,{ $project: {count :{$size : "$comment"} } } 	    ])
