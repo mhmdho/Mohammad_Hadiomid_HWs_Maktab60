@@ -1,0 +1,21 @@
+from order.serializers import *
+from order.models import *
+from rest_framework.renderers import JSONRenderer
+import io
+from rest_framework.parsers import JSONParser
+
+order = Order.objects.all()
+Order_s = OrderSerializer(order, many=True)
+Order_s.data
+
+Order_s_json = JSONRenderer().render(Order_s.data[0])
+Order_s_json
+
+stream = io.BytesIO(Order_s_json)
+data = JSONParser().parse(stream)
+
+serializer = OrderSerializer(data=data)
+serializer.is_valid()
+serializer.validated_data
+
+
