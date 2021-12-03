@@ -68,5 +68,6 @@ def login_site(request):
     return render(request, 'forms/login.html', {'form': form})
 
 
-
-
+def logout_site(request):
+    logout(request)
+    return redirect('login_url')
