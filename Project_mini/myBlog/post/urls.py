@@ -1,5 +1,5 @@
 from django.urls import path
-from post.views import PostListView, PostDetail, each_category_posts, show_category_list
+from post.views import PostListView, PostDetail, each_category_posts, login_site, logout_site, show_category_list
 
 urlpatterns = [
     path('post-list/', PostListView.as_view(), name='post-list'),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('category-posts/<int:id>', each_category_posts, name = 'category_to_posts'),
     # path('',MainPageView.as_view()),
 
-
+    path('login/', login_site, name='login_url'),
+    path('logout/', logout_site, name='logout_url'),
 
 ]
