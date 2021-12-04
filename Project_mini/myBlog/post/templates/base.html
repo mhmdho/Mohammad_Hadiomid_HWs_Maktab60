@@ -58,6 +58,17 @@
           </ul>
 
           <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item">
+              <form action="{% url 'search_url' %}" class="input-group text-center me-5 my-1">
+                <div class="form-outline">
+                  <input type="search" id="form1" class="form-control" name='search_box' />
+                  <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="input-group-text border-0" id="search-addon">
+                  <i class="fas fa-search" id="mdb-5-search-icon"></i>
+                </button>
+              </form>
+            </li>
             <!-- Icons -->
             <li class="nav-item me-3 me-lg-0">
               <a class="nav-link" href="https://www.youtube.com/" rel="nofollow"

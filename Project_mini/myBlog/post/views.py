@@ -11,6 +11,8 @@ from .forms import LoginForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
+from django.db.models.query_utils import Q
+
 
 # Create your views here.
 
@@ -71,3 +73,14 @@ def login_site(request):
 def logout_site(request):
     logout(request)
     return redirect('login_url')
+
+
+def search_site(request):
+    if request.method == "GET":
+        search = request.GET.get('search_box')
+        posts = Post.Published.filter(Q(title__icontains=search) |
+                                    Q(descrption__icontains=search))
+    return render(request, 'post/search.html', {'posts': posts})
+    # Post.objects.annotate(
+    #     search=SearchVector ('post__title', 'post__description'),
+    #     ).filter(search='cheese')
