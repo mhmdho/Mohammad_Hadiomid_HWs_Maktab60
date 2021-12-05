@@ -2,24 +2,22 @@
 
 {% block content %}
 
-{% if massage}
-
-endblock
-
 <div id="intro" class="p-4 text-center bg-light">
     <h4 class="mb-2 h2">Login</h4>
 </div>
 
-<div class="container">
+<div class="container text-center my-5">
     <div class="col-md-12 my-3">
         <form action='{% url "login_url" %}?next={{request.GET.next}}' method="post">
         {% csrf_token %}
             {{form.as_p}}
             <!-- <input type="hidden" value="next"> -->
-            <input type="submit" value="ارسال کن بره">
+            <input type="submit" value="Login">
         </form>
+        <div class="my-5">
+            <p>not registered yet? <a href='{% url "register_url" %}'> REGISTER NOW</a></p>
+        </div>
     </div>
-
 </div>
 
 {% endblock content %}

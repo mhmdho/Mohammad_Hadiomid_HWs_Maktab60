@@ -7,12 +7,12 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment
 
-from .forms import LoginForm
+from .forms import ForgetPasswordForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 from django.db.models.query_utils import Q
-
+from django.contrib.auth.models import User 
 
 # Create your views here.
 
@@ -47,21 +47,22 @@ def each_category_posts(request, id):
 
 
 def login_site(request):
-    # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
         form = LoginForm(request.POST)
-        # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
             user = authenticate(request,username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-                return redirect(request.GET.get('next'))
+                next = request.GET.get('next')
+                try:
+                    return redirect(next)
+                except:              
+                    return redirect('index')
+            #if loged in cannot redirect to login.
             else :
-                print('not found user')
+                print('not found user') #add messege
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            return render(request, 'forms/login.html', {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -75,12 +76,21 @@ def logout_site(request):
     return redirect('login_url')
 
 
+def Register_site(request):
+    form = RegisterForm(None or request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            return HttpResponse('user registered')
+
+    return render(request, 'forms/register.html', {'form':form})
+
+
 def search_site(request):
     if request.method == "GET":
         search = request.GET.get('search_box')
         posts = Post.Published.filter(Q(title__icontains=search) |
                                     Q(descrption__icontains=search))
     return render(request, 'post/search.html', {'posts': posts})
-    # Post.objects.annotate(
-    #     search=SearchVector ('post__title', 'post__description'),
-    #     ).filter(search='cheese')
+
+
