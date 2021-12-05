@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment
 
-from .forms import ForgetPasswordForm, LoginForm, RegisterForm
+from .forms import ChangePasswordForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -93,4 +93,18 @@ def search_site(request):
                                     Q(descrption__icontains=search))
     return render(request, 'post/search.html', {'posts': posts})
 
+@login_required(login_url='login_url')
+def change_password(request):
+    form = ChangePasswordForm()
+    if request.method == "POST":
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            print('u', user)
+            if user.check_password(form.cleaned_data.get('old_password')):
+                user.set_password(form.cleaned_data.get('new_password'))
+                user.save()
+                return redirect('login_url')
+
+    return render(request, 'forms/change_password.html', {'form': form})
 

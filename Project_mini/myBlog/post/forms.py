@@ -16,8 +16,16 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'password']
 
-class ForgetPasswordForm(forms.Form):
+
+class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput)
     new_password = forms.CharField(widget=forms.PasswordInput)
     confirm_new_password = forms.CharField(widget=forms.PasswordInput)
 
+    def clean_confirm_new_password(self):
+        new_password = self.cleaned_data['new_password']
+        confirm_new_password = self.cleaned_data['confirm_new_password']
+        if new_password != confirm_new_password:
+            raise ValidationError('Two new passwords must be equal!')
+        
+        return confirm_new_password
