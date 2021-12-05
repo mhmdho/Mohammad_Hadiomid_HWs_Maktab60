@@ -1,0 +1,42 @@
+{%extends  "base.html"%}
+
+{% block content %}
+
+<div id="intro" class="p-4 text-center bg-light">
+  <h4 class="mb-2 h2">tags</h4>
+</div>
+
+<main class="my-5">
+  <div class="container">
+    <!--Section: Content-->
+    <section class="text-center mt-5">
+        <div class="row">
+          {% for tag in tags %}
+            <div class="col-lg-2 col-md-12 mb-4">
+              <div class="card">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/new/standard/nature/00{{ tag.id }}.jpg" class="img-fluid" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ tag.title }}</h5>
+                  <p class="card-text">
+
+                    
+                  </p>
+                  <a href="{% url 'tag_to_posts' id=tag.id %}" class="btn btn-primary">Related posts</a>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            There is no tag.
+          {% endfor %}
+
+        </div>
+    </section>
+  </div>
+</main>
+
+{% endblock content %}

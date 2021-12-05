@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 
 from django.urls import reverse
 
-from post.models import Post, Category, Comment
+from post.models import Post, Category, Comment, Tag
 
 from .forms import ChangePasswordForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate,login,logout
@@ -37,13 +37,22 @@ class PostDetail(DetailView):
     
 
 def show_category_list(request):
-    category_list = list(Category.objects.all())
+    category_list = Category.objects.all()
     return render(request, 'post/category_list.html', {'categories': category_list})
 
 @login_required(redirect_field_name='next', login_url='login_url')
 def each_category_posts(request, id):
-    category_posts = list(Post.objects.filter(category__id = id))
+    category_posts = Post.objects.filter(category__id = id)
     return render(request, 'post/category_posts.html', {'category_posts': category_posts})
+
+
+def show_tag_list(request):
+    tag_list = Tag.objects.all()
+    return render(request, 'post/tag_list.html', {'tags': tag_list})
+
+def each_tag_posts(request, id):
+    tag_posts = Post.objects.filter(tag__id = id)
+    return render(request, 'post/tag_posts.html', {'tag_posts': tag_posts})
 
 
 def login_site(request):
@@ -86,13 +95,6 @@ def Register_site(request):
     return render(request, 'forms/register.html', {'form':form})
 
 
-def search_site(request):
-    if request.method == "GET":
-        search = request.GET.get('search_box')
-        posts = Post.Published.filter(Q(title__icontains=search) |
-                                    Q(descrption__icontains=search))
-    return render(request, 'post/search.html', {'posts': posts})
-
 @login_required(login_url='login_url')
 def change_password(request):
     form = ChangePasswordForm()
@@ -108,3 +110,10 @@ def change_password(request):
 
     return render(request, 'forms/change_password.html', {'form': form})
 
+
+def search_site(request):
+    if request.method == "GET":
+        search = request.GET.get('search_box')
+        posts = Post.Published.filter(Q(title__icontains=search) |
+                                    Q(descrption__icontains=search))
+    return render(request, 'post/search.html', {'posts': posts})
