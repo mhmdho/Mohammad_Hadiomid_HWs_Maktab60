@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import ChangePasswordForm, LoginForm, RegisterForm
+from .forms import AddCategoryForm, ChangePasswordForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -37,8 +37,13 @@ class PostDetail(DetailView):
     
 
 def show_category_list(request):
+    new_category = request.GET.get('category_box')
+    form = AddCategoryForm(None or new_category)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('category-list'))
     category_list = Category.objects.all()
-    return render(request, 'post/category_list.html', {'categories': category_list})
+    return render(request, 'post/category_list.html', {'categories': category_list, 'form_cat':form})
 
 @login_required(redirect_field_name='next', login_url='login_url')
 def each_category_posts(request, id):
@@ -117,3 +122,19 @@ def search_site(request):
         posts = Post.Published.filter(Q(title__icontains=search) |
                                     Q(descrption__icontains=search))
     return render(request, 'post/search.html', {'posts': posts})
+
+
+@login_required(login_url='/post/login')
+def add_category(request):
+    # if request.method == "GET":
+    #     new_category = request.GET.get('category_box')
+    #     categry = Category.objects.create(title=new_category.cleaned_data['title'])
+    # return render(request,'post/category_list.html', {'form_cat':categry})
+
+    form = AddCategoryForm(None or request.POST)
+    if form.is_valid():
+        form.save()
+            #messages.add_message(request, messages.ERROR, f'تگ مورد نظر ذخیره گردید.',extra_tags="danger")
+        return redirect(reverse('category-list'))
+
+    return render(request,'forms/add_category.html',{'form_cat':form})

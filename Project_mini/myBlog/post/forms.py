@@ -29,3 +29,12 @@ class ChangePasswordForm(forms.Form):
             raise ValidationError('Two new passwords must be equal!')
         
         return confirm_new_password
+
+
+class AddCategoryForm(forms.Form):
+    title = forms.CharField(max_length=255,min_length=3,
+                           widget= forms.TextInput
+                           (attrs={'placeholder':'Add new category here'}))
+
+    def save(self):
+        Category.objects.create(title=self.cleaned_data['title'])

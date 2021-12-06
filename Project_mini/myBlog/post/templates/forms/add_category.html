@@ -3,16 +3,16 @@
 {% block content %}
 
 <div id="intro" class="p-4 text-center bg-light">
-    <h4 class="mb-2 h2">Register</h4>
+    <h4 class="mb-2 h2">Add Category</h4>
 </div>
 
-<div class="container my-5">
+<div class="container my-5 text-center">
     <div class="col-md-12 my-3">
-        <form action='{% url "register_url" %}?next={{request.GET.next}}' method="post">
+        <form action='{% url "add_category_url" %}?next={{request.GET.next}}' method="post">
             {% csrf_token %}
-            {{form.as_p}}
+            {{form_cat.as_p}}
             <!-- <input type="hidden" value="next"> -->
-            <input type="submit" value="register">
+            <input type="submit" value="Add">
         </form>
     </div>
 </div>

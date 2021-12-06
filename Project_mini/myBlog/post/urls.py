@@ -1,5 +1,5 @@
 from django.urls import path
-from post.views import PostListView, PostDetail, Register_site, change_password, each_category_posts, each_tag_posts, login_site, logout_site, search_site, show_category_list, show_tag_list
+from post.views import PostListView, PostDetail, Register_site, add_category, change_password, each_category_posts, each_tag_posts, login_site, logout_site, search_site, show_category_list, show_tag_list
 
 urlpatterns = [
     path('post-list/', PostListView.as_view(), name='post-list'),
@@ -16,6 +16,8 @@ urlpatterns = [
     path('logout/', logout_site, name='logout_url'),
     path('register/', Register_site, name='register_url'),
     path('changepassword/', change_password, name='change_password_url'),
+
+    path('add_category/', add_category, name='add_category_url'),
 
     path('search/', search_site, name='search_url'),
 

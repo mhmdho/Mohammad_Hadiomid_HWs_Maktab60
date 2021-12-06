@@ -6,6 +6,19 @@
   <h4 class="mb-2 h2">All Categories</h4>
 </div>
 
+<div class="container mt-3 text-center" style="padding:30px">
+  <form action="{% url 'add_category_url' %}" method="post">
+          <div class="input-group">
+            {% csrf_token %}
+            {{ form_cat.title }}
+            <!-- <input type="text" class="form-control text-center" placeholder="Add your new category here" name="category_box"> -->
+            <button class="btn btn-primary" type="submit">Add</button>
+            <!-- <button class="btn btn-danger" type="button">X</button> -->
+          </div>
+  </form>
+</div>
+
+
 <main class="my-5">
   <div class="container">
     <!--Section: Content-->
@@ -22,9 +35,11 @@
                     </div>
                     <div class="card-body">
                     <h5 class="card-title">{{ category.title }}</h5>
-                    <p class="card-text">
-
-                    </p>
+                      
+                      <a href="" class="btn btn-warning" style="width: 47%;">Edit</a>
+                      <a href="" class="btn btn-danger px-0" style="width: 47%;">Delete</a>
+                      <hr>
+                      <br>
 
                     <a href="{% url 'category_to_posts' id=category.id %}" class="btn btn-primary">Read Posts</a>
                     </div>
@@ -40,3 +55,4 @@
 </main>
 
 {% endblock content %}
+
