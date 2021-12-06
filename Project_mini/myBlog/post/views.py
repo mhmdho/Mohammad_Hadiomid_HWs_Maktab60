@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import AddCategoryForm, ChangePasswordForm, LoginForm, RegisterForm
+from .forms import AddCategoryForm, AddTagForm, ChangePasswordForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -52,8 +52,13 @@ def each_category_posts(request, id):
 
 
 def show_tag_list(request):
+    new_tag = request.GET.get('tag_box')
+    form = AddCategoryForm(None or new_tag)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('tag-list'))
     tag_list = Tag.objects.all()
-    return render(request, 'post/tag_list.html', {'tags': tag_list})
+    return render(request, 'post/tag_list.html', {'tags': tag_list, 'form_tag': form})
 
 def each_tag_posts(request, id):
     tag_posts = Post.objects.filter(tag__id = id)
@@ -138,3 +143,14 @@ def add_category(request):
         return redirect(reverse('category-list'))
 
     return render(request,'forms/add_category.html',{'form_cat':form})
+
+
+@login_required(login_url='/post/login')
+def add_tag(request):
+    form = AddTagForm(None or request.POST)
+    if form.is_valid():
+        form.save()
+            #messages.add_message(request, messages.ERROR, f'تگ مورد نظر ذخیره گردید.',extra_tags="danger")
+        return redirect(reverse('tag-list'))
+
+    return render(request,'forms/add_tag.html',{'form_tag':form})

@@ -35,6 +35,14 @@ class AddCategoryForm(forms.Form):
     title = forms.CharField(max_length=255,min_length=3,
                            widget= forms.TextInput
                            (attrs={'placeholder':'Add new category here'}))
-
     def save(self):
         Category.objects.create(title=self.cleaned_data['title'])
+
+
+class AddTagForm(forms.Form):
+    title = forms.CharField(max_length=255,min_length=3,
+                           widget= forms.TextInput
+                           (attrs={'placeholder':'Add new tag here'}))
+
+    def save(self):
+        Tag.objects.create(title=self.cleaned_data['title'])
