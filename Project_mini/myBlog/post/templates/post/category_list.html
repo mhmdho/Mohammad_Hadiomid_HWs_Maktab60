@@ -36,7 +36,7 @@
                     <div class="card-body">
                     <h5 class="card-title">{{ category.title }}</h5>
                       
-                      <a href="" class="btn btn-warning" style="width: 47%;">Edit</a>
+                      <a href="{% url 'edit_category_url' id=category.id %}" class="btn btn-warning" style="width: 47%;">Edit</a>
                       <a href="{% url 'delete_category_url' id=category.id %}" class="btn btn-danger px-0" style="width: 47%;">Delete</a>
                       <hr>
                       <br>
