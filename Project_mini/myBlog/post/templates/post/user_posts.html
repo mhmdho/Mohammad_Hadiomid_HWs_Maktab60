@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="intro" class="p-4 text-center bg-light">
-  <h4 class="mb-2 h2">Posts of {{ tag.title }} Tag</h4>
+  <h4 class="mb-2 h2"> {{ user_posts.title }} Dashboard</h4>
 </div>
 
 <main class="my-5">
@@ -11,7 +11,7 @@
     <!--Section: Content-->
     <section class="text-center mt-5">
         <div class="row">
-            {% for post in tag_posts %}
+            {% for post in user_posts %}
                 <div class="col-lg-3 col-md-12 mb-4">
                     <div class="card">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">

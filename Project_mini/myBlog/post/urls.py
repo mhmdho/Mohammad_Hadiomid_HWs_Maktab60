@@ -1,6 +1,6 @@
 from django.urls import path
 from post.views import PostListView, PostDetail, Register_site, add_category, add_tag, change_password,\
-                    delete_category, each_category_posts, each_tag_posts, login_site, logout_site, search_site,\
+                    delete_category, each_category_posts, each_tag_posts, each_user_posts, login_site, logout_site, search_site,\
                     show_category_list, show_tag_list, edit_category, delete_tag, edit_tag
 
 urlpatterns = [
@@ -25,6 +25,9 @@ urlpatterns = [
     path('edit_category/<int:id>',edit_category, name="edit_category_url"),
     path('delete_tag/<int:id>',delete_tag, name="delete_tag_url"),
     path('eidt_tag/<int:id>',edit_tag, name="edit_tag_url"),
+
+    path('user_posts/<int:id>', each_user_posts, name = 'user_posts_url'),
+
 
     path('search/', search_site, name='search_url'),
 

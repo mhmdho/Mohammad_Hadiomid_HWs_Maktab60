@@ -79,7 +79,7 @@ def login_site(request):
                 try:
                     return redirect(next)
                 except:              
-                    return redirect('index')
+                    return redirect('user_posts_url author_id=id')
             #if loged in cannot redirect to login.
             else :
                 print('not found user') #add messege
@@ -148,7 +148,7 @@ def add_category(request):
     return render(request,'forms/add_category.html',{'form_cat':form})
 
 
-@login_required(login_url='/post/login')
+@login_required(login_url='/post/user_posts')
 def add_tag(request):
     form = AddTagForm(None or request.POST)
     if form.is_valid():
@@ -203,3 +203,10 @@ def edit_tag(request,id):
             return redirect(reverse('tag-list'))
 
     return render(request, 'forms/edit_tag.html', {'form':form,'tag':tag})
+
+
+@login_required(login_url='login_url')
+def each_user_posts(request, id):
+    user_posts = Post.objects.filter(author__id=id)
+    return render(request, 'post/user_posts.html', {'user_posts': user_posts})
+
