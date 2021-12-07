@@ -46,3 +46,10 @@ class AddTagForm(forms.Form):
 
     def save(self):
         Tag.objects.create(title=self.cleaned_data['title'])
+
+
+
+class CategoryDeleteForm(forms.ModelForm):
+    class Meta : 
+        model = Category
+        fields = []

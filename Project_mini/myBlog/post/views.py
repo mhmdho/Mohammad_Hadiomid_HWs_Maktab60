@@ -7,12 +7,14 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import AddCategoryForm, AddTagForm, ChangePasswordForm, LoginForm, RegisterForm
+from .forms import AddCategoryForm, AddTagForm, ChangePasswordForm,\
+                 LoginForm, RegisterForm, CategoryDeleteForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 from django.db.models.query_utils import Q
 from django.contrib.auth.models import User 
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -154,3 +156,15 @@ def add_tag(request):
         return redirect(reverse('tag-list'))
 
     return render(request,'forms/add_tag.html',{'form_tag':form})
+
+
+def delete_category(request, id):
+    
+    category = get_object_or_404(Category, id=id)
+    form = CategoryDeleteForm(instance=category)
+    if request.method == "POST":
+        category.delete()
+        print('delete')
+        return redirect(reverse('category-list'))
+
+    return render(request,'forms/delete_category.html',{'form':form,'category':category})
