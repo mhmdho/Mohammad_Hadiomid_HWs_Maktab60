@@ -7,8 +7,8 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import AddCategoryForm, AddPostForm, AddTagForm, ChangePasswordForm,\
-                 LoginForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
+from .forms import AddCategoryForm, AddPostForm, AddTagForm, ChangePasswordForm, EditPostForm,\
+                 LoginForm, PostDeleteForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
                  TagDeleteForm, EditTagForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -78,9 +78,10 @@ def login_site(request):
                 next = request.GET.get('next')
                 try:
                     return redirect(next)
-                except:              
-                    return redirect('user_posts_url author_id=id')
-            #if loged in cannot redirect to login.
+                except:        
+                    id = request.user.id      
+                    return redirect('user_posts_url')
+            #if loged in cannot redirect to dashboard.
             else :
                 print('not found user') #add messege
             # redirect to a new URL:
@@ -132,7 +133,7 @@ def search_site(request):
     return render(request, 'post/search.html', {'posts': posts})
 
 
-@login_required(login_url='/post/login')
+@login_required(login_url='login_url')
 def add_category(request):
     # if request.method == "GET":
     #     new_category = request.GET.get('category_box')
@@ -148,7 +149,7 @@ def add_category(request):
     return render(request,'forms/add_category.html',{'form_cat':form})
 
 
-@login_required(login_url='/post/login')
+@login_required(login_url='login_url')
 def add_tag(request):
     form = AddTagForm(None or request.POST)
     if form.is_valid():
@@ -206,8 +207,8 @@ def edit_tag(request,id):
 
 
 @login_required(login_url='login_url')
-def each_user_posts(request, id):
-    user_posts = Post.objects.filter(author__id=id)
+def each_user_posts(request):
+    user_posts = Post.objects.filter(author__id=request.user.id)
     return render(request, 'post/user_posts.html', {'user_posts': user_posts})
 
 
@@ -220,3 +221,25 @@ def add_post(request):
         return redirect(reverse('post-list'))
 
     return render(request,'forms/add_post.html',{'form_post':form})
+
+
+def delete_post(request, id):
+    post = get_object_or_404(Post, id=id)
+    form = PostDeleteForm(instance=post)
+    if request.method == "POST" and request.user.id == post.author.id:
+        post.delete()
+        return redirect(reverse('post-list'))
+
+    return render(request,'forms/delete_post.html',{'form':form,'post':post})
+
+
+def edit_post(request,id):
+    post = get_object_or_404(Post, id=id)
+    form = EditPostForm(instance=post)
+    if request.method == "POST" and request.user.id == post.author.id:
+        form = EditPostForm(request.POST,instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('post-list'))
+
+    return render(request, 'forms/edit_post.html', {'form':form,'post':post})
