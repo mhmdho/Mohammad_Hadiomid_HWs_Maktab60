@@ -53,7 +53,6 @@ class CategoryDeleteForm(forms.ModelForm):
         model = Category
         fields = []
 
-
 class EditCategoryForm(forms.ModelForm):
     title = forms.CharField(max_length=255,min_length=3,
                         widget= forms.TextInput
@@ -62,7 +61,16 @@ class EditCategoryForm(forms.ModelForm):
         model = Category
         fields = ['title']
 
+
 class TagDeleteForm(forms.ModelForm):
     class Meta : 
         model = Tag
         fields = []
+
+class EditTagForm(forms.ModelForm):
+    title = forms.CharField(max_length=255,min_length=3,
+                        widget= forms.TextInput
+                        (attrs={'placeholder':'Add new name here'}))
+    class Meta : 
+        model = Tag
+        fields = ['title']

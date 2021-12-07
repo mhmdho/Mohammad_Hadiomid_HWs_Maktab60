@@ -9,7 +9,7 @@ from post.models import Post, Category, Comment, Tag
 
 from .forms import AddCategoryForm, AddTagForm, ChangePasswordForm,\
                  LoginForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
-                 TagDeleteForm
+                 TagDeleteForm, EditTagForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -192,3 +192,14 @@ def delete_tag(request, id):
         return redirect(reverse('tag-list'))
 
     return render(request,'forms/delete_tag.html',{'form':form,'tag':tag})
+
+def edit_tag(request,id):
+    tag = get_object_or_404(Tag, id=id)
+    form = EditTagForm(instance=Tag)
+    if request.method == "POST":
+        form = EditTagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('tag-list'))
+
+    return render(request, 'forms/edit_tag.html', {'form':form,'tag':tag})
