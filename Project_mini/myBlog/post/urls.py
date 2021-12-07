@@ -1,7 +1,7 @@
 from django.urls import path
 from post.views import PostListView, PostDetail, Register_site, add_category, add_tag, change_password,\
                     delete_category, each_category_posts, each_tag_posts, login_site, logout_site, search_site,\
-                    show_category_list, show_tag_list, edit_category
+                    show_category_list, show_tag_list, edit_category, delete_tag
 
 urlpatterns = [
     path('post-list/', PostListView.as_view(), name='post-list'),
@@ -23,6 +23,7 @@ urlpatterns = [
     path('add_tag/', add_tag, name='add_tag_url'),
     path('delete_category/<int:id>',delete_category, name="delete_category_url"),
     path('edit_category/<int:id>',edit_category, name="edit_category_url"),
+    path('delete_tag/<int:id>',delete_tag, name="delete_tag_url"),
 
     path('search/', search_site, name='search_url'),
 

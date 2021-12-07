@@ -34,10 +34,11 @@
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">{{ tag.title }}</h5>
-                  <p class="card-text">
 
-                    
-                  </p>
+                    <a href="{% url 'delete_tag_url' id=tag.id %}" class="btn btn-danger px-0" style="width: 47%;">Delete</a>
+                    <hr>
+                    <br>
+                  
                   <a href="{% url 'tag_to_posts' id=tag.id %}" class="btn btn-primary">Related posts</a>
                 </div>
               </div>

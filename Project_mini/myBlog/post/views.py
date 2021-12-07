@@ -8,7 +8,8 @@ from django.urls import reverse
 from post.models import Post, Category, Comment, Tag
 
 from .forms import AddCategoryForm, AddTagForm, ChangePasswordForm,\
-                 LoginForm, RegisterForm, CategoryDeleteForm, EditCategoryForm
+                 LoginForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
+                 TagDeleteForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -180,3 +181,14 @@ def edit_category(request,id):
             return redirect(reverse('category-list'))
 
     return render(request, 'forms/edit_category.html', {'form':form,'category':category})
+
+
+def delete_tag(request, id):
+    
+    tag = get_object_or_404(Tag, id=id)
+    form = TagDeleteForm(instance=Tag)
+    if request.method == "POST":
+        tag.delete()
+        return redirect(reverse('tag-list'))
+
+    return render(request,'forms/delete_tag.html',{'form':form,'tag':tag})

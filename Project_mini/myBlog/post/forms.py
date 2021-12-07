@@ -61,3 +61,8 @@ class EditCategoryForm(forms.ModelForm):
     class Meta : 
         model = Category
         fields = ['title']
+
+class TagDeleteForm(forms.ModelForm):
+    class Meta : 
+        model = Tag
+        fields = []
