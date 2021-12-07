@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import AddCategoryForm, AddTagForm, ChangePasswordForm,\
+from .forms import AddCategoryForm, AddPostForm, AddTagForm, ChangePasswordForm,\
                  LoginForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
                  TagDeleteForm, EditTagForm
 from django.contrib.auth import authenticate,login,logout
@@ -148,7 +148,7 @@ def add_category(request):
     return render(request,'forms/add_category.html',{'form_cat':form})
 
 
-@login_required(login_url='/post/user_posts')
+@login_required(login_url='/post/login')
 def add_tag(request):
     form = AddTagForm(None or request.POST)
     if form.is_valid():
@@ -210,3 +210,13 @@ def each_user_posts(request, id):
     user_posts = Post.objects.filter(author__id=id)
     return render(request, 'post/user_posts.html', {'user_posts': user_posts})
 
+
+@login_required(login_url='login_url')
+def add_post(request):
+    form = AddPostForm(None or request.POST)
+    if form.is_valid():
+        form.save()
+
+        return redirect(reverse('post-list'))
+
+    return render(request,'forms/add_post.html',{'form_post':form})

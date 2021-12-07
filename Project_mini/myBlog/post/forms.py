@@ -74,3 +74,18 @@ class EditTagForm(forms.ModelForm):
     class Meta : 
         model = Tag
         fields = ['title']
+
+
+# class AddPostForm(forms.Form):
+#     title = forms.CharField(max_length=255,min_length=3,
+#                            widget= forms.TextInput
+#                            (attrs={'placeholder':'Add new post here'}))
+
+#     def save(self):
+#         Post.objects.create(title=self.cleaned_data['title'])
+
+
+class AddPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = '__all__'
