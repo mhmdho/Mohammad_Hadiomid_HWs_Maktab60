@@ -39,8 +39,10 @@
                 </div>
             {% empty %}
                 <p></p>
-                <p class="my-5 pb-5">There is no post.</p>
-                <p class="my-3"></p>
+                <p>welcome {{user}}, You have written no post.</p>
+                <a href="{% url 'add_post_url' %}">+ create new post</a>
+                <p class="my-5 pt-4 pb-5"></p>
+
             {% endfor %}
 
         </div>

@@ -209,7 +209,7 @@ def edit_tag(request,id):
 @login_required(login_url='login_url')
 def each_user_posts(request):
     user_posts = Post.objects.filter(author__id=request.user.id)
-    return render(request, 'post/user_posts.html', {'user_posts': user_posts})
+    return render(request, 'post/user_posts.html', {'user_posts': user_posts, 'user': request.user.username})
 
 
 @login_required(login_url='login_url')

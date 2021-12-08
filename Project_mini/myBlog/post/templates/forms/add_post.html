@@ -11,7 +11,6 @@
         <form action='{% url "add_post_url" %}?next={{request.GET.next}}' method="post">
             {% csrf_token %}
             {{form_post.as_p}}
-            <!-- <input type="hidden" value="next"> -->
             <input type="submit" value="Add">
         </form>
     </div>
