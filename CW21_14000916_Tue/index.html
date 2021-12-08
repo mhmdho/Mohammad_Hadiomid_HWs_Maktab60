@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Hadiomid CW21</title>
+    <link rel="stylesheet"
+        id="theme_link"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="style/navbar-fixed-left.min.css">
+    <link rel="stylesheet" href="style/docs.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="style/docs.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand" href>Post List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav">
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="modal-body m-5" >
+        <div class="card" style="width: 25rem;" id="addCardUser">
+
+
+
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                $.get('http://127.0.0.1:8000/myBlog/post/', function (data, status) {
+                    $.each(data, function (index, value) {
+                        li_row = '<li class="nav-item">'
+                            + `<a class="nav-link"> ${value.id}. ${value.title}</a>`
+                            + "</li>"
+                        $('#navbarsExampleDefault>ul').append(li_row)
+                    })
+                })
+            })
+        
+            $('body').on('click', '.nav-link', function () {
+                id = $(this).closest("li").find('a').eq(0).text().charAt(1)
+
+                $.get(`http://127.0.0.1:8000/myBlog/post/${id}`, function (data, status) {
+                    // image = `<img class="card-img-top" src="${data.image.url}" alt="Card image cap">`
+                    card_ul = `<ul class="list-group list-group-flush">
+                                    <li class="list-group-item">ID :  ${id}</li>
+                                    <li class="list-group-item">Title :  ${data.title}</li>
+                                    <li class="list-group-item">Author :  ${data.author.username}</li>
+                                    <li class="list-group-item">Short Description :  ${data.short_description}</li>
+                                    <li class="list-group-item">Created at :  ${data.created_at}</li>
+                                    <li class="list-group-item">Like :  ${data.like}</li>
+                                    <li class="list-group-item">Published :  ${data.status}</li>
+                                    <li class="list-group-item" id="alltag">Tags : </li>
+                                    <li class="list-group-item" id="allcategory">Categories : </li>
+                                    <li class="list-group-item" id="allcomment">Comments : </li>
+
+                                </ul>`
+
+                    // $('#addCardUser>div>img').remove()
+                    $('#addCardUser ul').remove()
+                    // $('#addCardUser').append(image)
+                    $('#addCardUser').append(card_ul)
+
+                    $.each(data.tag, function (index, value) {
+                            tags = `${value.title} / `
+                            $('#alltag ').append(tags)
+                    }) 
+                    $.each(data.category, function (index, value) {
+                            categories = `${value.title} / `
+                            $('#allcategory ').append(categories)
+                    })
+                    $.each(data.comment, function (index, value) {
+                            comment = `<p>user${value.owner}:  ${value.description}</p> `
+                            $('#allcomment ').append(comment)
+                    })
+                })
+            })
+        })
+    </script>
+    
+</body>
+
+</html>
