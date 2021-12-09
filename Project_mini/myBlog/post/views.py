@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import AddCategoryForm, AddPostForm, AddTagForm, ChangePasswordForm, EditPostForm,\
+from .forms import AddCategoryForm, AddCommentForm, AddPostForm, AddTagForm, ChangePasswordForm, EditPostForm,\
                  LoginForm, PostDeleteForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
                  TagDeleteForm, EditTagForm
 from django.contrib.auth import authenticate,login,logout
@@ -250,3 +250,14 @@ def edit_post(request,id):
             return redirect(reverse('user_posts_url'))
 
     return render(request, 'forms/edit_post.html', {'form':form,'post':post})
+
+@login_required(login_url='post_detail')
+def add_comment(request, slug):
+    post = Post.Published.get(slug=slug)
+    form = AddCommentForm(request.POST)
+    if form.is_valid():
+        form.save()
+
+        return redirect(reverse('add_comment_url'))
+
+    return render(request,'forms/add_comment.html',{'post':post, 'form_com':form, 'user':request.user})

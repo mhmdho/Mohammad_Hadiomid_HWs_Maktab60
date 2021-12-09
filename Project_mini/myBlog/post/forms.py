@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields
-from .models import  Tag,Category,Post
+from .models import  Comment, Tag,Category,Post
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -98,3 +98,8 @@ class EditPostForm(forms.ModelForm):
     class Meta : 
         model = Post
         fields = ['title', 'short_description', 'descrption', 'status']
+
+class AddCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = '__all__'

@@ -58,7 +58,7 @@ class Comment(models.Model):
     owner = models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='comment_owner')
     title = models.CharField(max_length=30)
     description = models.TextField(max_length=400)   
-    like = models.IntegerField(default=0)
+    like = models.IntegerField(default=0, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
