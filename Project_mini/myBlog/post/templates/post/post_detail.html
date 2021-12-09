@@ -14,7 +14,11 @@
             <div class="col-lg-12 col-md-12 mb-4">
               <div class="card">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                  <img src="{{ post.image.url }}" class="img-fluid" />
+                  {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid" />
+                  {% else %}
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/00{{ post.id }}.jpg" class="img-fluid" />
+                  {% endif %}
                   <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                   </a>
@@ -39,6 +43,7 @@
                     <ul class="list_group px-5 text-lg-start">
                     {% for comment in comment_list %}
                         <li class="list-group-item">
+                            {{ comment.title }}
                             <h6>{{ comment.owner }} :  {{ comment.description }}</h6>
                             <p class="my-0 text-lg-end">{{ comment.created_at }} ---  (likes: {{ comment.like }})</p>
                         </li>

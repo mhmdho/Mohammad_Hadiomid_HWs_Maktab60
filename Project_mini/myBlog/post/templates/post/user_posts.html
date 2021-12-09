@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="intro" class="p-4 text-center bg-light">
-  <h4 class="mb-2 h2"> {{ user_posts.title }} Dashboard</h4>
+  <h4 class="mb-2 h2"><strong>{{ user }}</strong> Dashboard</h4>
 </div>
 
 <main class="my-5">
@@ -15,7 +15,11 @@
                 <div class="col-lg-3 col-md-12 mb-4">
                     <div class="card">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="https://mdbootstrap.com/img/new/standard/nature/00{{ post.id }}.jpg" class="img-fluid" />
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="img-fluid" />
+                            {% else %}
+                                <img src="https://mdbootstrap.com/img/new/standard/nature/00{{ post.id }}.jpg" class="img-fluid" />
+                            {% endif %}
                             <a href="#!">
                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                             </a>
@@ -31,8 +35,13 @@
                                 <br>
                                 Created at: {{ post.created_at.date }}
 
-                                
                             </p>
+
+                            <a href="{% url 'edit_post_url' id=post.id %}" class="btn btn-warning" style="width: 47%;">Edit</a>
+                            <a href="{% url 'delete_post_url' id=post.id %}" class="btn btn-danger px-0" style="width: 47%;">Delete</a>
+                            <hr>
+                            <br>
+
                             <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary">Read</a>
                         </div>
                     </div>

@@ -8,12 +8,13 @@
 
 <div class="container my-5 text-center">
     <div class="col-md-12 my-3">
-        <form action='{% url "add_post_url" %}?next={{request.GET.next}}' method="post">
+        <form enctype="multipart/form-data"  method="post" action='{% url "add_post_url" %}'>
             {% csrf_token %}
-            {{form_post.as_p}}
+            {{form_post.as_p }}
             <input type="submit" value="Add">
         </form>
     </div>
 </div>
+
 
 {% endblock content %}

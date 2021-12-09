@@ -9,6 +9,8 @@
 <main class="my-5">
   <div class="container">
     <!--Section: Content-->
+    <a href="{% url 'add_post_url' %}" class="btn btn-primary">create new post</a>
+
     <section class="text-center mt-5">
         <div class="row">
           {% for post in object_list %}

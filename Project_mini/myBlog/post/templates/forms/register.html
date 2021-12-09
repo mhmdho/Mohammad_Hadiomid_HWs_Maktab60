@@ -6,12 +6,11 @@
     <h4 class="mb-2 h2">Register</h4>
 </div>
 
-<div class="container my-5">
+<div class="container my-5 text-center">
     <div class="col-md-12 my-3">
         <form action='{% url "register_url" %}?next={{request.GET.next}}' method="post">
             {% csrf_token %}
             {{form.as_p}}
-            <!-- <input type="hidden" value="next"> -->
             <input type="submit" value="register">
         </form>
     </div>

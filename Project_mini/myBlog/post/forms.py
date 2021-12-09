@@ -97,4 +97,4 @@ class PostDeleteForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta : 
         model = Post
-        fields = ['title', 'short_description', 'descrption']
+        fields = ['title', 'short_description', 'descrption', 'status']

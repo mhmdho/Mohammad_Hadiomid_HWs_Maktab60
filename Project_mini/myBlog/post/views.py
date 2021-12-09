@@ -1,4 +1,4 @@
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -23,11 +23,14 @@ class MainPageView(ListView):
     model = Post
     template_name = "post/index.html"
     context_object_name = 'posts'
+    queryset = Post.Published.all()
 
 
 class PostListView(ListView):
     model = Post
     paginate_by = 8
+    queryset = Post.Published.all()
+
 
 
 class PostDetail(DetailView):
@@ -48,9 +51,9 @@ def show_category_list(request):
     category_list = Category.objects.all()
     return render(request, 'post/category_list.html', {'categories': category_list, 'form_cat':form})
 
-@login_required(redirect_field_name='next', login_url='login_url')
+
 def each_category_posts(request, id):
-    category_posts = Post.objects.filter(category__id = id)
+    category_posts = Post.Published.filter(category__id = id)
     return render(request, 'post/category_posts.html', {'category_posts': category_posts})
 
 
@@ -64,7 +67,7 @@ def show_tag_list(request):
     return render(request, 'post/tag_list.html', {'tags': tag_list, 'form_tag': form})
 
 def each_tag_posts(request, id):
-    tag_posts = Post.objects.filter(tag__id = id)
+    tag_posts = Post.Published.filter(tag__id = id)
     return render(request, 'post/tag_posts.html', {'tag_posts': tag_posts})
 
 
@@ -143,7 +146,6 @@ def add_category(request):
     form = AddCategoryForm(None or request.POST)
     if form.is_valid():
         form.save()
-            #messages.add_message(request, messages.ERROR, f'تگ مورد نظر ذخیره گردید.',extra_tags="danger")
         return redirect(reverse('category-list'))
 
     return render(request,'forms/add_category.html',{'form_cat':form})
@@ -160,8 +162,8 @@ def add_tag(request):
     return render(request,'forms/add_tag.html',{'form_tag':form})
 
 
+@login_required(login_url='login_url')
 def delete_category(request, id):
-    
     category = get_object_or_404(Category, id=id)
     form = CategoryDeleteForm(instance=category)
     if request.method == "POST":
@@ -172,6 +174,7 @@ def delete_category(request, id):
     return render(request,'forms/delete_category.html',{'form':form,'category':category})
 
 
+@login_required(login_url='login_url')
 def edit_category(request,id):
     category = get_object_or_404(Category, id=id)
     form = EditCategoryForm(instance=Category)
@@ -184,8 +187,8 @@ def edit_category(request,id):
     return render(request, 'forms/edit_category.html', {'form':form,'category':category})
 
 
+@login_required(login_url='login_url')
 def delete_tag(request, id):
-    
     tag = get_object_or_404(Tag, id=id)
     form = TagDeleteForm(instance=Tag)
     if request.method == "POST":
@@ -194,6 +197,8 @@ def delete_tag(request, id):
 
     return render(request,'forms/delete_tag.html',{'form':form,'tag':tag})
 
+
+@login_required(login_url='login_url')
 def edit_tag(request,id):
     tag = get_object_or_404(Tag, id=id)
     form = EditTagForm(instance=Tag)
@@ -214,25 +219,27 @@ def each_user_posts(request):
 
 @login_required(login_url='login_url')
 def add_post(request):
-    form = AddPostForm(None or request.POST)
+    form = AddPostForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
 
-        return redirect(reverse('post-list'))
+        return redirect(reverse('user_posts_url'))
 
-    return render(request,'forms/add_post.html',{'form_post':form})
+    return render(request,'forms/add_post.html',{'form_post':form, 'user':request.user})
 
 
+@login_required(login_url='login_url')
 def delete_post(request, id):
     post = get_object_or_404(Post, id=id)
     form = PostDeleteForm(instance=post)
     if request.method == "POST" and request.user.id == post.author.id:
         post.delete()
-        return redirect(reverse('post-list'))
+        return redirect(reverse('user_posts_url'))
 
     return render(request,'forms/delete_post.html',{'form':form,'post':post})
 
 
+@login_required(login_url='login_url')
 def edit_post(request,id):
     post = get_object_or_404(Post, id=id)
     form = EditPostForm(instance=post)
@@ -240,6 +247,6 @@ def edit_post(request,id):
         form = EditPostForm(request.POST,instance=post)
         if form.is_valid():
             form.save()
-            return redirect(reverse('post-list'))
+            return redirect(reverse('user_posts_url'))
 
     return render(request, 'forms/edit_post.html', {'form':form,'post':post})
