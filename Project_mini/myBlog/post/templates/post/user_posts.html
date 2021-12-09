@@ -37,8 +37,8 @@
 
                             </p>
 
-                            <a href="{% url 'edit_post_url' id=post.id %}" class="btn btn-warning" style="width: 47%;">Edit</a>
-                            <a href="{% url 'delete_post_url' id=post.id %}" class="btn btn-danger px-0" style="width: 47%;">Delete</a>
+                            <a href="{% url 'edit_post_url' slug=post.slug %}" class="btn btn-warning" style="width: 47%;">Edit</a>
+                            <a href="{% url 'delete_post_url' slug=post.slug %}" class="btn btn-danger px-0" style="width: 47%;">Delete</a>
                             <hr>
                             <br>
 

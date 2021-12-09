@@ -1,5 +1,6 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
+from django.views.generic.base import RedirectView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
@@ -54,7 +55,7 @@ def show_category_list(request):
 
 def each_category_posts(request, id):
     category_posts = Post.Published.filter(category__id = id)
-    return render(request, 'post/category_posts.html', {'category_posts': category_posts})
+    return render(request, 'post/category_posts.html', {'category_posts': category_posts, 'user':request.user})
 
 
 def show_tag_list(request):
@@ -229,8 +230,8 @@ def add_post(request):
 
 
 @login_required(login_url='login_url')
-def delete_post(request, id):
-    post = get_object_or_404(Post, id=id)
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     form = PostDeleteForm(instance=post)
     if request.method == "POST" and request.user.id == post.author.id:
         post.delete()
@@ -240,24 +241,27 @@ def delete_post(request, id):
 
 
 @login_required(login_url='login_url')
-def edit_post(request,id):
-    post = get_object_or_404(Post, id=id)
+def edit_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     form = EditPostForm(instance=post)
     if request.method == "POST" and request.user.id == post.author.id:
-        form = EditPostForm(request.POST,instance=post)
+        form = EditPostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
             return redirect(reverse('user_posts_url'))
 
     return render(request, 'forms/edit_post.html', {'form':form,'post':post})
 
-@login_required(login_url='post_detail')
 def add_comment(request, slug):
-    post = Post.Published.get(slug=slug)
-    form = AddCommentForm(request.POST)
-    if form.is_valid():
-        form.save()
+    if request.user.id:
+        post = Post.objects.get(slug=slug)
+        comment = post.post_comment.all()
+        form = AddCommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(f'../add_comment/{slug}')
+    else:
+        return redirect(f'../post-detail/{slug}')
 
-        return redirect(reverse('add_comment_url'))
-
-    return render(request,'forms/add_comment.html',{'post':post, 'form_com':form, 'user':request.user})
+    return render(request,'forms/add_comment.html',{
+        'post':post, 'comment_list':comment, 'form_com':form, 'user':request.user})

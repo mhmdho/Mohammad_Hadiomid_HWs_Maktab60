@@ -87,7 +87,7 @@ class EditTagForm(forms.ModelForm):
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
+        exclude = ['slug', 'like']
 
 class PostDeleteForm(forms.ModelForm):
     class Meta : 
@@ -97,9 +97,13 @@ class PostDeleteForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta : 
         model = Post
-        fields = ['title', 'short_description', 'descrption', 'status']
+        exclude = ['slug', 'like']
 
 class AddCommentForm(forms.ModelForm):
+    title = forms.CharField(max_length=30,
+                    widget= forms.TextInput
+                    (attrs={'placeholder':'comment title'}))
+
     class Meta:
         model = Comment
-        fields = '__all__'
+        exclude = ['like']

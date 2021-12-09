@@ -8,7 +8,7 @@
 
 <div class="container my-5 text-center">
     <div class="col-md-12 my-3">
-        <form action="{% url 'edit_post_url' id=post.id %}?next={{request.GET.next}}" method="post">
+        <form action="{% url 'edit_post_url' slug=post.slug %}?next={{request.GET.next}}" method="post">
             {% csrf_token %}
             {{form.as_p}}
             <p>edit ({{post.title}}) ?</p>

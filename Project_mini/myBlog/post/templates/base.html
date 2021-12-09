@@ -37,15 +37,16 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
       <div class="container-fluid">
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="{% url 'login_url' %}"> Login
+        {% if request.user.id %}
+          <a class="navbar-brand" href="{% url 'user_posts_url' %}"> {{ request.user.username }} </a>
+          <a class="navbar-brand" href="{% url 'logout_url' %}"> Logout </a>
+        {% else %} 
+          <a class="navbar-brand" href="{% url 'login_url' %}"> Login </a>
+        {% endif %}
+        <!-- <a class="navbar-brand" href="#"> Mohammad's blog
           <img src="#" height="16" alt="" loading="lazy"
             style="margin-top: -3px;" />
-        </a>
-        <a class="navbar-brand" href="{% url 'logout_url' %}"> Logout</a>
-        <a class="navbar-brand" href="#"> Mohammad's blog
-          <img src="#" height="16" alt="" loading="lazy"
-            style="margin-top: -3px;" />
-        </a>
+        </a> -->
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
           aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
