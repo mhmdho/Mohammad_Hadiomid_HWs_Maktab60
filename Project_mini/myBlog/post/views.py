@@ -166,7 +166,7 @@ def add_tag(request):
 @login_required(login_url='login_url')
 def delete_category(request, id):
     category = get_object_or_404(Category, id=id)
-    form = CategoryDeleteForm(instance=category)
+    form = CategoryDeleteForm()
     if request.method == "POST":
         category.delete()
         print('delete')
@@ -178,7 +178,7 @@ def delete_category(request, id):
 @login_required(login_url='login_url')
 def edit_category(request,id):
     category = get_object_or_404(Category, id=id)
-    form = EditCategoryForm(instance=Category)
+    form = EditCategoryForm(instance=category)
     if request.method == "POST":
         form = EditCategoryForm(request.POST,instance=category)
         if form.is_valid():
@@ -191,7 +191,7 @@ def edit_category(request,id):
 @login_required(login_url='login_url')
 def delete_tag(request, id):
     tag = get_object_or_404(Tag, id=id)
-    form = TagDeleteForm(instance=Tag)
+    form = TagDeleteForm()
     if request.method == "POST":
         tag.delete()
         return redirect(reverse('tag-list'))
@@ -202,9 +202,9 @@ def delete_tag(request, id):
 @login_required(login_url='login_url')
 def edit_tag(request,id):
     tag = get_object_or_404(Tag, id=id)
-    form = EditTagForm(instance=Tag)
+    form = EditTagForm(instance=tag)
     if request.method == "POST":
-        form = EditTagForm(request.POST)
+        form = EditTagForm(request.POST, instance=tag)
         if form.is_valid():
             form.save()
             return redirect(reverse('tag-list'))
@@ -234,7 +234,7 @@ def add_post(request):
 @login_required(login_url='login_url')
 def delete_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    form = PostDeleteForm(instance=post)
+    form = PostDeleteForm()
     if request.method == "POST" and request.user.id == post.author.id:
         post.delete()
         return redirect(reverse('user_posts_url'))
@@ -258,6 +258,7 @@ def edit_post(request, slug):
 def add_comment(request, slug):
     if request.user.id:
         post = Post.objects.get(slug=slug)
+        print(post.like)
         comment = post.post_comment.all()
         tag = Tag.objects.filter(post__slug=slug)
         category = Category.objects.filter(post__slug=slug)
@@ -275,19 +276,19 @@ def add_comment(request, slug):
         'post':post, 'comment_list':comment, 'tags':tag, 'categories':category, 'form_com':form, 'user':request.user})
 
 
-# def post_like(request, slug):
-#     print(slug, 'soifowejfvoijwejfosdjfosdjfo-----')
-#     if request.method == 'POST':
-#         if request.user.id:
-#             post = Post.objects.get(slug=slug)
-#             post.like += 1
-#             # if form.is_valid():
-#             return redirect(f'../add_comment/{slug}')
-#     # else:
-#     #     return redirect(f'../post-detail/{slug}')
+def post_like(request, slug):
+    print(slug, 'soifowejfvoijwejfosdjfosdjfo-----')
+    if request.method == 'POST':
+        if request.user.id:
+            post = Post.objects.get(slug=slug)
+            post.like += 1
+            # if form.is_valid():
+            return redirect(reverse(f'../add_comment/{slug}'))
+    # else:
+    #     return redirect(f'../post-detail/{slug}')
 
-#     # return render(request,'forms/add_comment.html',{
-#     #     'post':post, 'comment_list':comment, 'form_com':form, 'user':request.user})
+    # return render(request,'forms/add_comment.html',{
+    #     'post':post, 'comment_list':comment, 'form_com':form, 'user':request.user})
 
 
 def contact_site(request):

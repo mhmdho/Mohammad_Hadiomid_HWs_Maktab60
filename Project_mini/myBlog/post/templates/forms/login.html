@@ -10,7 +10,7 @@
 
 <div class="container text-center my-5">
     <div class="col-md-12 my-3">
-        <form action='{% url "login_url" %}?next={{request.GET.next}}' method="post">
+        <form action='{% url "login_url" %}' method="post">
             {% csrf_token %}
             {{form.as_p}}
             <!-- <input type="hidden" value="next"> -->

@@ -9,7 +9,7 @@
 
 <div class="container my-5 text-center">
     <div class="col-md-12 my-3">
-        <form action='{% url "add_category_url" %}?next={{request.GET.next}}' method="post">
+        <form action='{% url "add_category_url" %}' method="post">
             {% csrf_token %}
             {{form_cat.as_p}}
             <!-- <input type="hidden" value="next"> -->

@@ -12,7 +12,7 @@
 <div class="content my-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-5 mr-auto pt-5">
+            <div class="col-md-6 mr-auto pt-5">
                 <h2>Share your view with us</h2>
                     <p class="my-5 pe-2 me-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quaerat autem corrupti asperiores accusantium et fuga! Facere excepturi, quo eos, nobis doloremque dolor labore expedita illum iusto, aut repellat fuga!</p>
                 <ul class="list-unstyled pl-md-5 pt-5">
@@ -23,27 +23,33 @@
                     <li class="d-flex text-black"><span class="mr-3"><span class="icon-envelope-o"></span></span> info@myblog.com </li>
                 </ul>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5 m-auto">
                 <form class="mb-5" method="post" id="contactForm" name="contactForm" novalidate="novalidate">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-group mt-4">
                             <label for="name" class="col-form-label">Name</label>
-                            {{form.name}}
+                            <div class="fieldWrapper">
+                                {{form.name}}
+                            </div>
                             <!-- <input form="" type="text" class="form-control error" name="name" id="name" aria-required="true" placeholder="Please enter your name"><label id="name-error" class="error" for="name"></label> -->
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="email" class="col-form-label">Email</label>
-                            {{ form.email_address }}
+                            <div class="fieldWrapper">
+                                {{ form.email_address }}
+                            </div>
                             <!-- <input type="text" class="form-control error" name="email" id="email" aria-required="true" placeholder="Please enter a valid email address"><label id="email-error" class="error" for="email"></label> -->
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="message" class="col-form-label">Message</label>
-                            {{ form.message }}
+                            <div class="fieldWrapper">
+                                {{ form.message }}
+                            </div>
                             <!-- <textarea class="form-control error" name="message" id="message" cols="30" rows="7" aria-required="true" aria-invalid="true" placeholder="Please enter a message"></textarea><label id="message-error" class="error" for="message"></label> -->
                         </div>
                     </div>
@@ -55,16 +61,6 @@
                     </div>
                 </form>
                 <div id="form-message-warning mt-4"></div>
-                {% if messages %}
-                    {% for message in messages %}
-                                    
-                        {% if message.tags %} 
-                            <div class="{{ message.tags }}"></div>
-                        {% endif %}
-                        {{ message }}
-
-                    {% endfor %}
-                {% endif %}
             </div>
         </div>
     </div>

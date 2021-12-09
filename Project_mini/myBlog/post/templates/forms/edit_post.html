@@ -9,11 +9,21 @@
 
 <div class="container my-5 text-center">
     <div class="col-md-12 my-3">
-        <form action="{% url 'edit_post_url' slug=post.slug %}?next={{request.GET.next}}" method="post">
+        <form action="{% url 'edit_post_url' slug=post.slug %}" method="post">
             {% csrf_token %}
-            {{form.as_p}}
-            <p>edit ({{post.title}}) ?</p>
+            {% for field in form %}
+                <label for="title" class="col-form-label">{{ field.label_tag }}</label>
+                <div class="fieldWrapper mb-4">
+                    <!-- {{ field.errors }} -->
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <input class="btn btn-danger" type="submit" value="edit">
+            <p class="fw-light fst-italic">Edit ({{post.title}}) ?</p>
+
         </form>
     </div>
 </div>
