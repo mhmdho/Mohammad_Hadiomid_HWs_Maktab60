@@ -1,6 +1,5 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic.base import RedirectView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
@@ -8,7 +7,7 @@ from django.urls import reverse
 
 from post.models import Post, Category, Comment, Tag
 
-from .forms import AddCategoryForm, AddCommentForm, AddPostForm, AddTagForm, ChangePasswordForm, EditPostForm,\
+from .forms import AddCategoryForm, AddCommentForm, AddPostForm, AddTagForm, ChangePasswordForm, ContactForm, EditPostForm,\
                  LoginForm, PostDeleteForm, RegisterForm, CategoryDeleteForm, EditCategoryForm,\
                  TagDeleteForm, EditTagForm
 from django.contrib.auth import authenticate,login,logout
@@ -17,6 +16,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.query_utils import Q
 from django.contrib.auth.models import User 
 from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail, BadHeaderError
+
 
 # Create your views here.
 
@@ -120,7 +121,6 @@ def change_password(request):
         form = ChangePasswordForm(request.POST)
         if form.is_valid():
             user = request.user
-            print('u', user)
             if user.check_password(form.cleaned_data.get('old_password')):
                 user.set_password(form.cleaned_data.get('new_password'))
                 user.save()
@@ -222,6 +222,8 @@ def each_user_posts(request):
 def add_post(request):
     form = AddPostForm(request.POST, request.FILES)
     if form.is_valid():
+        obj = form.save(commit=False)
+        obj.author = request.user
         form.save()
 
         return redirect(reverse('user_posts_url'))
@@ -252,16 +254,59 @@ def edit_post(request, slug):
 
     return render(request, 'forms/edit_post.html', {'form':form,'post':post})
 
+
 def add_comment(request, slug):
     if request.user.id:
         post = Post.objects.get(slug=slug)
         comment = post.post_comment.all()
-        form = AddCommentForm(request.POST)
+        tag = Tag.objects.filter(post__slug=slug)
+        category = Category.objects.filter(post__slug=slug)
+        form = AddCommentForm(request.POST, initial={})
         if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = request.user
+            obj.post = post
             form.save()
             return redirect(f'../add_comment/{slug}')
     else:
         return redirect(f'../post-detail/{slug}')
 
     return render(request,'forms/add_comment.html',{
-        'post':post, 'comment_list':comment, 'form_com':form, 'user':request.user})
+        'post':post, 'comment_list':comment, 'tags':tag, 'categories':category, 'form_com':form, 'user':request.user})
+
+
+# def post_like(request, slug):
+#     print(slug, 'soifowejfvoijwejfosdjfosdjfo-----')
+#     if request.method == 'POST':
+#         if request.user.id:
+#             post = Post.objects.get(slug=slug)
+#             post.like += 1
+#             # if form.is_valid():
+#             return redirect(f'../add_comment/{slug}')
+#     # else:
+#     #     return redirect(f'../post-detail/{slug}')
+
+#     # return render(request,'forms/add_comment.html',{
+#     #     'post':post, 'comment_list':comment, 'form_com':form, 'user':request.user})
+
+
+def contact_site(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			subject = "Website Inquiry" 
+			body = {
+			'name': form.cleaned_data['name'], 
+			'email': form.cleaned_data['email_address'], 
+			'message':form.cleaned_data['message'], 
+			}
+			message = "\n".join(body.values())
+
+			try:
+				send_mail(subject, message, 'hadiomidm@gmail.com', ['hadiomidm@gmail.com']) 
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect ("index")
+      
+	form = ContactForm()
+	return render(request, "post/contact.html", {'form':form})

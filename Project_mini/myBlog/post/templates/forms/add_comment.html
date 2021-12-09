@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
+{% block header %}
+    Post Details
+{% endblock header %}
+
 {% block content %}
 
-<div id="intro" class="p-4 text-center bg-light">
-    <h4 class="mb-2 h2">Post Details</h4>
-  </div>
   
   <main class="my-5">
     <div class="container">
@@ -36,7 +37,17 @@
                       <hr>
                       <h4>{{ post.descrption }}</h4><br>
                       <hr>
-                      <p class="my-0 text-lg-end">edited: {{ post.updated_at }} --- {{ post.like}} person liked this post<p>
+                      <p class="my-0 text-lg-end">Edited: {{ post.updated_at }}
+                      <a href="" class="btn btn-secondary"> like:{{ post.like }}</a></p>
+                      <hr>Tags:
+                      {% for tag in tags %}
+                        {{ tag.title }} / 
+                      {% endfor %}
+                      <br>Categories:
+                      {% for category in categories %}
+                        {{ category.title }} / 
+                      {% endfor %}
+
                       <hr>
                       <br>
                       <h5>comments:</h5>
@@ -68,7 +79,7 @@
     <div class="col-md-12 my-3">
         <form action='{% url "add_comment_url" slug=post.slug %}' method="post">
             {% csrf_token %}
-            {{form_com.as_p }}
+            {{ form_com.as_p }}
             <input type="submit" value="Send">
         </form>
     </div>

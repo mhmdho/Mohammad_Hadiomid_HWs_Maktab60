@@ -1,10 +1,12 @@
 {%extends  "base.html"%}
 
+{% block header %}
+    Posts of {{ tag.title }} Tag
+{% endblock header %}
+
+
 {% block content %}
 
-<div id="intro" class="p-4 text-center bg-light">
-  <h4 class="mb-2 h2">Posts of {{ tag.title }} Tag</h4>
-</div>
 
 <main class="my-5">
   <div class="container">

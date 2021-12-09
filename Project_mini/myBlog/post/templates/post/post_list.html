@@ -1,10 +1,11 @@
 {%extends  "base.html"%}
 
+{% block header %}
+Posts
+{% endblock header %}
+
 {% block content %}
 
-<div id="intro" class="p-4 text-center bg-light">
-  <h4 class="mb-2 h2">Posts</h4>
-</div>
 
 <main class="my-5">
   <div class="container">
@@ -39,7 +40,7 @@
 
                     
                   </p>
-                  
+
                   <a href="{% url 'add_comment_url' slug=post.slug %}" class="btn btn-primary">Read</a>
                 </div>
               </div>

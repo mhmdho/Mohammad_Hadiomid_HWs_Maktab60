@@ -87,7 +87,7 @@ class EditTagForm(forms.ModelForm):
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ['slug', 'like']
+        exclude = ['slug', 'like', 'author']
 
 class PostDeleteForm(forms.ModelForm):
     class Meta : 
@@ -97,7 +97,7 @@ class PostDeleteForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta : 
         model = Post
-        exclude = ['slug', 'like']
+        exclude = ['slug', 'like', 'author']
 
 class AddCommentForm(forms.ModelForm):
     title = forms.CharField(max_length=30,
@@ -106,4 +106,10 @@ class AddCommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        exclude = ['like']
+        exclude = ['like', 'post', 'owner']
+
+
+class ContactForm(forms.Form):
+	name = forms.CharField(max_length = 50)
+	email_address = forms.EmailField(max_length = 150)
+	message = forms.CharField(widget = forms.Textarea, max_length = 2000)

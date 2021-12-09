@@ -57,13 +57,16 @@
               <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'category-list' %}" rel="nofollow">Category</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{% url 'post-list' %}">Post</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'category-list' %}" rel="nofollow">Category</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'tag-list' %}">tag</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact_url' %}">contact</a>
             </li>
           </ul>
 
@@ -106,6 +109,16 @@
       </div>
     </nav>
     <!-- Navbar -->
+
+
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+      <h4 class="mb-2 h2">{% block header %}  {% endblock header %}</h4>
+    </div>
+    <!-- Jumbotron -->
+
+  <!--Main Navigation-->
+
 </header>
 
 <body>
