@@ -3,7 +3,7 @@ from django.forms import fields
 from .models import  Comment, Tag,Category,Post
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.forms import UserCreationForm
 
 
 class LoginForm(forms.Form):
@@ -12,6 +12,7 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
@@ -88,6 +89,9 @@ class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
         exclude = ['slug', 'like', 'author']
+
+    # def save(self):
+    #     Post.objects.create(id=Post.objects.count()+1)
 
 class PostDeleteForm(forms.ModelForm):
     class Meta : 

@@ -11,8 +11,16 @@
     <div class="col-md-12 my-3">
         <form enctype="multipart/form-data"  method="post" action='{% url "add_post_url" %}'>
             {% csrf_token %}
+
+            <!-- {% if form_post.errors %}
+                {% for error in form_post.errors %}
+                    <strong class="text-lg-start">{{ error }}</strong>
+                {% endfor %}
+            {% endif %} -->
+
             {% for field in form_post %}
                 <label for="title" class="col-form-label">{{ field.label_tag }}</label>
+
                 <div class="fieldWrapper mb-4">
                     <!-- {{ field.errors }} -->
                     {{ field }}

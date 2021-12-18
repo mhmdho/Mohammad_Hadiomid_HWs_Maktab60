@@ -30,7 +30,7 @@ class MainPageView(ListView):
 
 class PostListView(ListView):
     model = Post
-    paginate_by = 8
+    paginate_by = 20
     queryset = Post.Published.all()
 
 
@@ -109,7 +109,7 @@ def Register_site(request):
     if request.method == "POST":
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            return HttpResponse('user registered')
+            return redirect('login_url')
 
     return render(request, 'forms/register.html', {'form':form})
 
@@ -169,7 +169,6 @@ def delete_category(request, id):
     form = CategoryDeleteForm()
     if request.method == "POST":
         category.delete()
-        print('delete')
         return redirect(reverse('category-list'))
 
     return render(request,'forms/delete_category.html',{'form':form,'category':category})
@@ -247,7 +246,7 @@ def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     form = EditPostForm(instance=post)
     if request.method == "POST" and request.user.id == post.author.id:
-        form = EditPostForm(request.POST, instance=post)
+        form = EditPostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect(reverse('user_posts_url'))
